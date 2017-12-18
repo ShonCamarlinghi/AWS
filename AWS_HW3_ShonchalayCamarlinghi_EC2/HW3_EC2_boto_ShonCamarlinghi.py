@@ -33,7 +33,7 @@ def main():
                                       security_group_ids=[group.id],
                                       subnet_id=sn1.id,
                                       key_name=keypairname
-                                        )
+                                    )
     time.sleep(60)
     print 'Checking what instances are running and stop them:'
     reservations = conn.get_all_reservations(
@@ -65,6 +65,7 @@ def main():
 def instanceStatusChangeCheck(i, status):
     while True:
         time.sleep(2)
+        print type(i.instances[0])
         i.instances[0].update()
         if i.instances[0].state == status:
             print i.instances[0].id + ' ' + status
