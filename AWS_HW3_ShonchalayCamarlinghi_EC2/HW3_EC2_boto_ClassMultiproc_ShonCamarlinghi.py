@@ -38,7 +38,7 @@ def main():
     q = Queue()
     for z in xrange(4):
         z = multiprocessing.Process(name=z, target=q_function, args=(q,))
-        z.daemon = False
+        z.daemon = True
         z.start()
         z.join()
 
