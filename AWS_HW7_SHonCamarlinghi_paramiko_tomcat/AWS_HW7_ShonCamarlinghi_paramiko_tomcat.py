@@ -44,6 +44,7 @@ def main():
         z = multiprocessing.Process(name=z, target=q_function, args=(q,))
         z.daemon = True
         z.start()
+        time.sleep(100)
         z.join()
 
 
