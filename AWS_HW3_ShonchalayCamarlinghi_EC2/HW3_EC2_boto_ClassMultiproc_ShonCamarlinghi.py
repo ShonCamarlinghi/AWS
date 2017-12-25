@@ -32,26 +32,18 @@ def main():
     # pool = Pool(processes=4)
     # pool.map(q_function(q), range(3))
     # # res = pool.apply_async(q_function(q))
-
-
-
     q = Queue()
     for z in xrange(4):
         z = multiprocessing.Process(name=z, target=q_function, args=(q,))
         z.daemon = True
         z.start()
+        time.sleep
         z.join()
-
 
 #  regex pattern in bash stdout  (see q_function, commented out line)  and finish process'
     # if 'Heroku' in q.get():
     #     print 'Heroku launched!'
     #     Heroku.join()
-
-
-
-
-
 
 # class instance(conn, amiid, group, sn1, keypairname):
 class instance(object):
@@ -67,7 +59,6 @@ class instance(object):
                                           )
 
         time.sleep(30)
-
         self.reservation = conn.get_all_reservations(filters={'instance-state-name': 'running'})
         for x in self.reservation:  #type(x) == 'class'; type self.i == 'unicode'
             self.i = x.instances[0].id
@@ -76,7 +67,6 @@ class instance(object):
             print "Instance ID %s is up and running, type %s" % (self.i, type(self.i))
         else:
             "Instance failed to start, please restart/debug your script..."
-
 
     def statusChangeCheck(self,status):
         # *.update(), *.state() works only for type(*) == class
@@ -112,7 +102,6 @@ def q_function(q): # multiprocessing function, q = Queue() defined in main()
     #q.put(subprocess.call((''.join([r'RAW BASH SHELL COMMAND WITH ARGS AND OPTIONS'])), stderr=subprocess.STDOUT, shell=True))
     q.put(s_function())  #actual function to be run in parallel, in queue
     print '\nFinished: ', p.name, p.pid
-
 
 
 if __name__ == '__main__':
