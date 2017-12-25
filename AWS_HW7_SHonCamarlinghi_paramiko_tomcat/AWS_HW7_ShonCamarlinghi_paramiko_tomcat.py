@@ -42,7 +42,7 @@ def main():
     q = Queue()
     for z in xrange(3):  # 3 instances
         z = multiprocessing.Process(name=z, target=q_function, args=(q,))
-        z.daemon = False
+        z.daemon = True
         z.start()
         z.join()
 
